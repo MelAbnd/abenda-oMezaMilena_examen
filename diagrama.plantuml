@@ -1,0 +1,51 @@
+@startuml
+class models.Libro{
+    titulo : string
+    precio : decimal
+    categoria : string
+}
+class models.Autor{
+nombre:string
+biografia:text
+}
+class models.Resena {
+  libro_id:int
+  usuario_id:int
+  idResena: int
+  contenido: string
+  puntuacion: int
+}
+class models.Usuario{
+lista_libros : string
+nombre: string
+}
+class models.SistemaBiblioteca{
+usuario:string
+adress:string
+phone:string
+} 
+class models.Usuario_sistema_Biblioteca{
+id:int
+usuario_id:int
+sistemaBiblioteca_id:int
+}
+class models.Usuario_sistemaBiblioteca_libro{
+libro_id:int
+usuario_sistemaBiblioteca_id:int
+}
+class models.LibroAutor{
+libro_id:int
+autor_id:int
+}
+
+
+LibroAutor "*"--"1" Autor
+Libro "1"--"*" LibroAutor
+Usuario "1"--"*" Usuario_sistema_Biblioteca
+Usuario_sistema_Biblioteca "1" -- "*" Usuario_sistemaBiblioteca_libro
+SistemaBiblioteca "1"--"1" Usuario_sistemaBiblioteca_libro
+Usuario_sistemaBiblioteca_libro "1"--"1" Libro
+Usuario "*" -- "1" Resena 
+Libro "*" -- "1" Resena
+
+@enduml
